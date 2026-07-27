@@ -1,0 +1,11 @@
+- name: Test Connectivity to Windows Hosts
+  hosts: windows_hosts
+  gather_facts: false
+  tasks:
+    - name: Run win_ping test
+      ansible.windows.win_ping:
+      register: ping_result
+
+    - name: Display the response
+      ansible.builtin.debug:
+        var: ping_result
