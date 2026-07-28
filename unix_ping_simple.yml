@@ -1,0 +1,6 @@
+- name: Verify Ansible connection to Unix hosts
+  hosts: unix_hosts
+  gather_facts: false
+  tasks:
+    - name: Execute Ansible built-in ping
+      ansible.builtin.ping:

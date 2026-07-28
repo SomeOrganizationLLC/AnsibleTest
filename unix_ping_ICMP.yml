@@ -1,0 +1,19 @@
+- name: Test ICMP reachability to Unix hosts
+  hosts: unix_hosts
+  gather_facts: false
+  tasks:
+    - name: Ping host from the control node
+      ansible.builtin.shell: "ping -c 2 {{ inventory_hostname }}"
+      delegate_to: localhost
+      register: ping_result
+      ignore_errors: true
+
+    - name: Show ping results
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} is reachable."
+      when: ping_result.rc == 0
+
+    - name: Warn if host is down
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} did not respond to ICMP packets."
+      when: ping_result.rc != 0
