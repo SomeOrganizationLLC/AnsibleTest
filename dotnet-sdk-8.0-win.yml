@@ -1,0 +1,8 @@
+- name: Install software on Windows - dotnet-sdk-8.0
+  hosts: windows_hosts
+  tasks: #  Required header
+    - name: Install the MSI package
+      ansible.windows.win_package: #  Correct! Indented under tasks
+       path: https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.423/dotnet-sdk-8.0.423-win-x64.exe
+       arguments: /install /passive /norestart
+       state: present

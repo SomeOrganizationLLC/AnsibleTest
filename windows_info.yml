@@ -1,0 +1,10 @@
+- name: Windows Server Configuration
+  hosts: windows_hosts
+  tasks:
+    - name: Check Windows version
+      win_shell: Get-ComputerInfo | Select-Object WindowsProductName
+      register: windows_info
+
+    - name: Display Windows version
+      debug:
+        msg: "{{ windows_info.stdout }}"
