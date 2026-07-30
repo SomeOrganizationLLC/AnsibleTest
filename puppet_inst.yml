@@ -1,0 +1,8 @@
+- hosts: unix_hosts
+  tasks:
+    - name: Install a package
+      become: yes
+      apt:
+        name: puppet
+        state: present
+        update_cache: yes
