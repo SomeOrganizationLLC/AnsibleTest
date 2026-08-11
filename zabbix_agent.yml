@@ -1,6 +1,6 @@
 ---
 - name: Установка и настройка Zabbix Agent на Ubuntu
-  hosts: linux_hosts
+  hosts: unix_hosts
   become: yes
   vars:
     zabbix_server_ip: "192.168.0.11"  # Замените на IP вашего Zabbix Server
