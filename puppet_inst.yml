@@ -3,6 +3,6 @@
     - name: Install a package
       become: yes
       apt:
-        name: htop
+        name: puppet
         state: present
         update_cache: yes
