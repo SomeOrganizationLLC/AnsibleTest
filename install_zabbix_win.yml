@@ -1,0 +1,32 @@
+- hosts: windows_hosts
+  tasks:
+    - name: Создать временную папку
+      win_file:
+        path: C:\temp
+        state: directory
+
+    - name: Скачать Zabbix Agent 7 MSI
+      win_uri:
+        url: https://cdn.zabbix.com/zabbix/binaries/stable/7.4/7.4.13/zabbix_agent-7.4.13-windows-amd64-openssl.msi
+        dest: C:\temp\zabbix_agent-7.4.13-windows-amd64-openssl.msi
+
+    - name: Установить Zabbix Agent
+      win_package:
+        path: C:\temp\zabbix_agent-7.4.13-windows-amd64-openssl.msi
+        state: present
+        arguments: /qn SERVER=192.168.0.11 SERVERACTIVE=192.168.0.11 HOSTNAME={{ inventory_hostname }}
+
+    - name: Разрешить порт 10050 в файрволе
+      win_firewall_rule:
+        name: Zabbix Agent
+        localport: 10050
+        protocol: tcp
+        state: present
+        direction: in
+        action: allow
+
+    - name: Запустить службу
+      win_service:
+        name: Zabbix Agent
+        state: started
+        start_mode: auto
