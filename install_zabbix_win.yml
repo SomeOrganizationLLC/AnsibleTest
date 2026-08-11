@@ -7,12 +7,12 @@
 
     - name: Скачать Zabbix Agent 7 MSI
       win_uri:
-        url: https://cdn.zabbix.com/zabbix/binaries/stable/7.4/7.4.13/zabbix_agent-7.4.13-windows-amd64-openssl.msi
-        dest: C:\temp\zabbix_agent-7.4.13-windows-amd64-openssl.msi
+        url: https://cdn.zabbix.com/zabbix/binaries/stable/7.0/7.0.29/zabbix_agent-7.0.29-windows-amd64-openssl.msi
+        dest: C:\temp\zabbix_agent-7.0.29-windows-amd64-openssl.msi
 
     - name: Установить Zabbix Agent
       win_package:
-        path: C:\temp\zabbix_agent-7.4.13-windows-amd64-openssl.msi
+        path: C:\temp\zabbix_agent-7.0.29-windows-amd64-openssl.msi
         state: present
         arguments: /qn SERVER=192.168.0.11 SERVERACTIVE=192.168.0.11 HOSTNAME={{ inventory_hostname }}
 
